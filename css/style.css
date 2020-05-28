@@ -1,0 +1,20 @@
+body{
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden; 
+  margin: 0px; 
+  background-color: rgba(249, 225, 236, 100);
+}
+
+h1{
+  font-family: 'Shrikhand', cursive;
+  font-weight: normal;
+  text-indent: 50%; 
+}
+
+table, td {
+    border: 50px;
+    border-color: rgb(82, 86, 89);
+    border-collapse: "true";
+  }
+
