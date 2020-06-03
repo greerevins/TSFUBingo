@@ -47,3 +47,10 @@ return newArray;
 //button onto the screen that does that every time it is pressed 
 //long term goal: make the bingo card interactive, so that you can "push" on a tile
 //and it appears crossed out on the screen. 
+
+function getFirstElement(anArray){
+newArray=(newBingoCard(anArray));
+return newArray.shift(0);
+}
+
+document.getElementById("00").innerHTML = getFirstElement(cultTiles);

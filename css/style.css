@@ -6,15 +6,15 @@ body{
   background-color: rgba(249, 225, 236, 100);
 }
 
-h1{
+h1{/* how to make font size bigger?*/
   font-family: 'Shrikhand', cursive;
   font-weight: normal;
-  text-indent: 50%; 
+  text-indent: 40%; 
 }
 
 table, td {
-    border: 50px;
+    border: 1px;
     border-color: rgb(82, 86, 89);
-    border-collapse: "true";
+    border-collapse: 'true';
   }
 
