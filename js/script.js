@@ -80,53 +80,24 @@ function buildAndPlaceTile(tileText, tileNumber, bingoType){
 
 function findOrCreateTr(tileNumber, bingoType) {
     // "bingoType" is the type of card, e.g. "cult" or "murder"
-    let bingoTable = document.getElementById(`${bingoType}-card`)
+    let bingoTable = document.getElementById(`${bingoType}-card`) //TODO: don't run it for every tile, only every table
+    //TODO: this function currently depends on the bingo table ID being "cult-card". Make the HTML have a button or something so the user can pick which flavor of card 
     if (!bingoTable) {
         // If the program can't find the table, raise an error
         console.log("Error!!!!! where's the table?!")
         return;
     } else {
         let tbody = bingoTable.children[0]; // tbody is always the first element of a table
-        let tr;
+        let rowNumber = Math.floor(tileNumber/5)
+        console.log('rowNumber is ' + rowNumber);
+        console.log(`tileNumber is ${tileNumber}`);
 
-        if (tileNumber == 0) {
-            // if there is no row, you create a new row
+        if ((tileNumber%5 == 0) || (tbody.childElementCount < rowNumber)) {
             return createTr(tbody);
-        } else if (tileNumber < 5) { // oh glob this is awful, do it with math
-            // otherwise, return the first row
-            return returnLastTr(tbody);
-        } else if ((tileNumber >= 5) && (i<10)) {
-            if (tbody.childElementCount == 1) {
-                // if there is only one row, you create a new row
-                return createTr(tbody);
-            } else {
-                // otherwise, return the second row
-                return returnLastTr(tbody);
-            }
-        } else if ((tileNumber >= 10) && (tileNumber < 15)) {
-            if (tbody.childElementCount == 2) {
-                //  create a new row
-                return createTr(tbody);
-            } else {
-                // otherwise, return the third row
-                return returnLastTr(tbody);
-            }
-        } else if ((tileNumber >= 15) && (tileNumber < 20)) {
-            if (tbody.childElementCount == 3) {
-                // if there is only one row, you create a new row
-                return createTr(tbody);
-            } else {
-                // otherwise, return the fourth row
-                return returnLastTr(tbody);
-            }
-        } else if ((tileNumber >= 20)) {
-            if (tbody.childElementCount == 4) {
-                // if there is only one row, you create a new row
-                return createTr(tbody);
-            } else {
-                // otherwise, return the fifth row
-                return returnLastTr(tbody);
-            }
+        } else {
+            // rowNumber is the rank the tile should be in (e.g. first row, 2nd row, etc)
+            // So if the number of trs is greater than or equal to the current rank, 
+            return tbody.children[rowNumber-1];
         }
     }
 }
@@ -148,7 +119,8 @@ function buildCard(bingoType){
     tiles = tileset(bingoType);
     // Place each tile
     for (i=0; i<tiles.length; i++) {
-        buildAndPlaceTile(tiles[i], i, bingoType)
+        let currentTile = tiles[i];
+        buildAndPlaceTile(currentTile, i, bingoType)
     }
 }
 
