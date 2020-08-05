@@ -14,45 +14,23 @@ let cultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Bra
  "Leader Is Incarnation Of God Or Jesus", "Justification Of Anything Leader Deems Necessary", 
  "Yoga And/Or Vegetarian Diet"];
 
-// function randomBingoCard(array1, array2){
-//     let itemOne= array1.shift();
-//     array1.push(itemOne);
-//     return array1.concat(array2);
-// } 
-
-// function stuffBingoCard(){
-//     elementCounter= 0;
-//     for (i=0; i<25; i++){
-//         elementCounter= elementCounter+1;
-//         document.getElementById("elementCounter").innerHTML = getFirstElement(cultTiles);
-
-//     }
-// }
-
-function getRandom(min, max){
-    return Math.floor(Math.random() * (max-min) + min);
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
 
-function tileset(bingoType){ 
-    // A function to generate 24 randomized tiles, including a "free" space
-    // todo: prevent duplicate tiles
-    // bingoType = 'cult'
+function tileSet(bingoType){ 
+    // A function to generate 25 randomized tiles, including a "free" space
+    // bingoType is a kind of bingo card, like 'cult'
 
     // we're converting a string, 'cult', into a variable name, cultTiles
-    let anArray = eval(bingoType + 'Tiles');
-
-    let newArray=[];
-    let text="";
-    for(i=0; i<anArray.length+1; i++){
-        if (i==12) {
-            text = "free";
-            newArray.push(text);
-        } else{
-            let tile = cultTiles[getRandom(0, cultTiles.length)]
-            newArray.push(tile);
-        }
-    }
-    return newArray;
+    let oldArray = eval(bingoType + 'Tiles');
+    shuffleArray(oldArray);
+    return oldArray;
 } 
 
 function getFirstElement(anArray){
@@ -67,7 +45,7 @@ function buildAndPlaceTile(tileText, tileNumber, bingoType){
     // shove the td into the appropriate tr
     let tr = findOrCreateTr(tileNumber, bingoType);
     if (!tr) {
-        console.log("an error occurred!!");
+        console.log("there's no Tr!!");
         return
     } else {
         let td= document.createElement("td");
@@ -92,12 +70,15 @@ function findOrCreateTr(tileNumber, bingoType) {
         console.log('rowNumber is ' + rowNumber);
         console.log(`tileNumber is ${tileNumber}`);
 
-        if ((tileNumber%5 == 0) || (tbody.childElementCount < rowNumber)) {
+        //the first four times through this tbody.children is empty and that results 
+        //in buildAndPlaceTile not being able to find a TR because the first four
+        //times this is called tilenumber is not divisible by 5 and rowNumber is 0
+        if (((tileNumber)%5 == 0) || (tbody.childElementCount <= rowNumber)) {
             return createTr(tbody);
         } else {
             // rowNumber is the rank the tile should be in (e.g. first row, 2nd row, etc)
             // So if the number of trs is greater than or equal to the current rank, 
-            return tbody.children[rowNumber-1];
+            return tbody.children[rowNumber];
         }
     }
 }
@@ -115,9 +96,10 @@ function createTr(tbody) {
 }
 
 function buildCard(bingoType){
-    // Get the correct tileset
-    tiles = tileset(bingoType);
+    // Get the correct tileSet
+    tiles = tileSet(bingoType);
     // Place each tile
+    tiles.splice(12, 0, "Free");
     for (i=0; i<tiles.length; i++) {
         let currentTile = tiles[i];
         buildAndPlaceTile(currentTile, i, bingoType)
