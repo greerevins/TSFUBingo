@@ -1,9 +1,12 @@
-//I need to build a user interface that looks like the bingo card ashley created. I need to 
+//make arrays to hold Generally Fucked up Bingo and Murder Bingo. Make Buttons to choose
+//which card you will interact with.(10/9/2020)
 //write a function that places each string from the array that randomBingoCard returns 
 //into an individual "bingo tile" and returns a completed bingo card. I need to insert a 
 //button onto the screen that does that every time it is pressed 
 //long term goal: make the bingo card interactive, so that you can "push" on a tile
 //and it appears crossed out on the screen. 
+//TODO: test bingo card on mikels web server on chrome and safari to make sure all looks
+//correct and that the fonts work
 
 let cultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Brainwashing", 
 "Compound", "Changed Names", "Matching Clothes And/Or Hair", "Penalty For Leaving", 
@@ -18,7 +21,7 @@ function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
-        array[i] = array[j];
+        array[i] = array[j]; 
         array[j] = temp;
     }
 }

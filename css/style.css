@@ -1,25 +1,37 @@
 body{
-  height: 100%; 
-  width: 100%; 
-  overflow: hidden; 
   margin: 0px; 
   background-color: rgba(249, 225, 236, 100);
 }
 
-h1{/* how to make font size bigger?*/
+h1{
+  font-size: 4em;
   font-family: 'Shrikhand', cursive;
   font-weight: normal;
-  text-indent: 40%; 
+  text-align: center;
+}
+
+table {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-transform: uppercase;
 }
 
 table, td {
-    border: 1px;
-    border-color: rgb(82, 86, 89);
-    border-collapse: 'true';
+    border: 3px solid #99878D;
+    border-collapse: collapse;
     font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
   }
 
 td {
-  width: 15%;
-  border: 2px solid black;
+  width: 15vw;
+  height: 15vw;
+  padding: 15px;
 }
+
+tr:nth-child(3) td:nth-child(3){
+  color: red;
+  font-size: 2.5em;
+}
+
