@@ -17,6 +17,21 @@ let cultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Bra
  "Leader Is Incarnation Of God Or Jesus", "Justification Of Anything Leader Deems Necessary", 
  "Yoga And/Or Vegetarian Diet"];
 
+ let murderTiles= ["Tortured Animals", "Pillar Of The Community", "Kept Trophies", "White Male",
+  "No Remorse", "Highly Intelligent", "Charming", "Did Badly In School", "Childhood Abuse", 
+  "Late Bed Wetter", "Substance Abuse", "Sexual Sadist", "Childhood Head Trauma", 
+  "Cooling off period between victims", "extreme self pity", "early psychiatric problems", 
+  "escalation", "involved in search party", "domineering mother", "absent father",
+   "tried for police force", "taunted police", "friendly with police", "childhood pyromania"];
+
+
+let fuckedUpTiles= ["people meet on the internet", "drugs/alcohol", "secret language/vocabulary", 
+"extreme beliefs", "manipulation", "missing person(s)", "mass hysteria", "cannibalism",
+ "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion/occult",
+  "straight con", "creepy uncle", "sudden catastrophic event", "sexual encounter", "dark web", 
+  "animals", "institutionalized", "government politics", "mutilation", "armed forces",
+   "bloodshed"];
+
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -61,14 +76,14 @@ function buildAndPlaceTile(tileText, tileNumber, bingoType){
 
 function findOrCreateTr(tileNumber, bingoType) {
     // "bingoType" is the type of card, e.g. "cult" or "murder"
-    let bingoTable = document.getElementById(`${bingoType}-card`) //TODO: don't run it for every tile, only every table
+    let bingoTable = document.getElementById("bingo-card") //TODO: don't run it for every tile, only every table
     //TODO: this function currently depends on the bingo table ID being "cult-card". Make the HTML have a button or something so the user can pick which flavor of card 
     if (!bingoTable) {
         // If the program can't find the table, raise an error
         console.log("Error!!!!! where's the table?!")
         return;
     } else {
-        let tbody = bingoTable.children[0]; // tbody is always the first element of a table
+        let tbody = bingoTable.children[0]; 
         let rowNumber = Math.floor(tileNumber/5)
         console.log('rowNumber is ' + rowNumber);
         console.log(`tileNumber is ${tileNumber}`);
@@ -98,7 +113,15 @@ function createTr(tbody) {
     return tr;
 }
 
+
+
 function buildCard(bingoType){
+    table = document.getElementById("bingo-card");
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+    let tbody = document.createElement("tbody");
+    table.appendChild(tbody);
     // Get the correct tileSet
     tiles = tileSet(bingoType);
     // Place each tile
@@ -109,7 +132,3 @@ function buildCard(bingoType){
     }
 }
 
-cards = ["cult", "murder", "general"]
-for(i=0; i<cards.length; i++){
-    buildCard(cards[i])
-}
