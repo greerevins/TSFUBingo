@@ -8,7 +8,7 @@
 //TODO: test bingo card on mikels web server on chrome and safari to make sure all looks
 //correct and that the fonts work
 
-let cultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Brainwashing", 
+let CultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Brainwashing", 
 "Compound", "Changed Names", "Matching Clothes And/Or Hair", "Penalty For Leaving", 
 "Separation Of Family Members Within", "Cut Off Ties From Family And Other Non-Members", 
 "Doomsday", "Sex Only With Leader", "Free Sex","No Sex", "Pedophelia", "Physical Abuse", 
@@ -17,7 +17,7 @@ let cultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Bra
  "Leader Is Incarnation Of God Or Jesus", "Justification Of Anything Leader Deems Necessary", 
  "Yoga And/Or Vegetarian Diet"];
 
- let murderTiles= ["Tortured Animals", "Pillar Of The Community", "Kept Trophies", "White Male",
+ let MurderTiles= ["Tortured Animals", "Pillar Of The Community", "Kept Trophies", "White Male",
   "No Remorse", "Highly Intelligent", "Charming", "Did Badly In School", "Childhood Abuse", 
   "Late Bed Wetter", "Substance Abuse", "Sexual Sadist", "Childhood Head Trauma", 
   "Cooling off period between victims", "extreme self pity", "early psychiatric problems", 
@@ -25,9 +25,9 @@ let cultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Bra
    "tried for police force", "taunted police", "friendly with police", "childhood pyromania"];
 
 
-let fuckedUpTiles= ["people meet on the internet", "drugs/alcohol", "secret language/vocabulary", 
+let FuckedUpTiles= ["people meet on the internet", "drugs/alcohol", "secret language / vocabulary", 
 "extreme beliefs", "manipulation", "missing person(s)", "mass hysteria", "cannibalism",
- "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion/occult",
+ "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion / occult",
   "straight con", "creepy uncle", "sudden catastrophic event", "sexual encounter", "dark web", 
   "animals", "institutionalized", "government politics", "mutilation", "armed forces",
    "bloodshed"];
@@ -48,7 +48,8 @@ function tileSet(bingoType){
     // we're converting a string, 'cult', into a variable name, cultTiles
     let oldArray = eval(bingoType + 'Tiles');
     shuffleArray(oldArray);
-    return oldArray;
+    newArray=oldArray.slice(0, 24)
+    return newArray;
 } 
 
 function getFirstElement(anArray){
@@ -116,6 +117,12 @@ function createTr(tbody) {
 
 
 function buildCard(bingoType){
+    console.log("here we go!")
+    let title=bingoType + " Bingo";
+    let result = title.replace( /([A-Z])/g, " $1" );
+    let finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+    document.getElementsByTagName("h1")[0].textContent=finalResult;
+    console.log("did it work??")
     table = document.getElementById("bingo-card");
     while (table.firstChild) {
         table.removeChild(table.firstChild);
@@ -123,7 +130,8 @@ function buildCard(bingoType){
     let tbody = document.createElement("tbody");
     table.appendChild(tbody);
     // Get the correct tileSet
-    tiles = tileSet(bingoType);
+    theTiles = tileSet(bingoType);
+    tiles=theTiles.slice()
     // Place each tile
     tiles.splice(12, 0, "Free");
     for (i=0; i<tiles.length; i++) {
