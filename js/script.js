@@ -25,12 +25,13 @@ let CultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Bra
    "tried for police force", "taunted police", "friendly with police", "childhood pyromania"];
 
 
-let FuckedUpTiles= ["people meet on the internet", "drugs/alcohol", "secret language / vocabulary", 
-"extreme beliefs", "manipulation", "missing person(s)", "mass hysteria", "cannibalism",
- "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion / occult",
+let FuckedUpTiles= ["complex cover up", "no justice", "fucked by the media", "wrongfully convicted",
+  "sex trafficking","people meet on the internet", "drugs / alcohol", "secret language / vocabulary", 
+  "extreme beliefs", "manipulation", "missing person(s)", "mass hysteria", "cannibalism",
+  "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion / occult",
   "straight con", "creepy uncle", "sudden catastrophic event", "sexual encounter", "dark web", 
   "animals", "institutionalized", "government politics", "mutilation", "armed forces",
-   "bloodshed"];
+  "bloodshed", "victim blaming", "munchausen"];
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {

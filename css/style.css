@@ -48,6 +48,39 @@ tr:nth-child(3) td:nth-child(3){
   font-size: 1rem;
   margin-bottom: 2rem;
   margin-left: 1rem;
+  border-style: solid;
+  outline: inherit;
 
 
+}
+
+.bingo-button:hover {
+  background-color: #ff5757;
+  color: white;
+}
+
+button:focus {
+  background-color: #ff5757;
+  color: white;
+}
+
+
+@media (max-width: 600px) {
+  h1 {
+    line-height: 57px;
+  }
+  .bingo-button {
+    margin-left: 0.5rem;
+    padding: 1rem 1rem;
+    width: 30%;
+    margin-top: 1rem;
+  }
+  td {
+    padding: 5px 2px;
+    font-size: 9pt;
+  }
+  tr:nth-child(3)
+  td:nth-child(3) {
+    font-size: 16pt;
+  }
 }
