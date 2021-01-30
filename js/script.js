@@ -1,37 +1,38 @@
-//make arrays to hold Generally Fucked up Bingo and Murder Bingo. Make Buttons to choose
-//which card you will interact with.(10/9/2020)
-//write a function that places each string from the array that randomBingoCard returns 
-//into an individual "bingo tile" and returns a completed bingo card. I need to insert a 
-//button onto the screen that does that every time it is pressed 
-//long term goal: make the bingo card interactive, so that you can "push" on a tile
-//and it appears crossed out on the screen. 
 //TODO: test bingo card on mikels web server on chrome and safari to make sure all looks
 //correct and that the fonts work
+//put the remaining bingo items from ashley into arrays
 
-let CultTiles= ["Charasmatic Leader", "Relinquished Money and Posesssions", "Brainwashing", 
-"Compound", "Changed Names", "Matching Clothes And/Or Hair", "Penalty For Leaving", 
-"Separation Of Family Members Within", "Cut Off Ties From Family And Other Non-Members", 
-"Doomsday", "Sex Only With Leader", "Free Sex","No Sex", "Pedophelia", "Physical Abuse", 
-"Public Outreach", "Those Who Leave Are Bad Or Evil", "Books, Tv, Etc About Abuse Of Members", 
-"Leader Has Sanskrit Name", "Death", "Multiple Groups In Different Locations",
- "Leader Is Incarnation Of God Or Jesus", "Justification Of Anything Leader Deems Necessary", 
- "Yoga And/Or Vegetarian Diet"];
+let CultTiles= ["sex with leader for spiritual growth","Designated hierarchy","Leader is all knowing",
+    "Leader dictates members romantic relationships","Members can't have kids","Wannabe rock star",
+    "Cult ruined a popular branded object (ex: Nikes or Koolaid)","Vulnerable groups or people",
+    "Special title for leader","Copied other cult leaders","Cherry picked","Busy bees","Absolute commitment required",
+    "Sleep deprivation","Dehumanizing punishments","Medicine not allowed","Jesus is an alien","Group punishments",
+    "Mass graves", "Charismatic Leader", "Relinquished Money and Posesssions", "Brainwashing", 
+    "Compound", "Changed Names", "Matching Clothes And / Or Hair", "Penalty For Leaving", 
+    "Separation Of Family Members Within", "Cut Off Ties From Family And Other Non-Members", 
+    "Doomsday", "Sex Only With Leader", "Free Sex","No Sex", "Pedophilia", "Physical Abuse", 
+    "Public Outreach", "Those Who Leave Are Bad Or Evil", "Books, Tv, Etc About Abuse Of Members", 
+    "Leader Has Sanskrit Name", "Death", "Multiple Groups In Different Locations",
+    "Leader Is Incarnation Of God Or Jesus", "Justification Of Anything Leader Deems Necessary", 
+    "Yoga And / Or Vegetarian Diet"];
 
- let MurderTiles= ["Tortured Animals", "Pillar Of The Community", "Kept Trophies", "White Male",
-  "No Remorse", "Highly Intelligent", "Charming", "Did Badly In School", "Childhood Abuse", 
-  "Late Bed Wetter", "Substance Abuse", "Sexual Sadist", "Childhood Head Trauma", 
-  "Cooling off period between victims", "extreme self pity", "early psychiatric problems", 
-  "escalation", "involved in search party", "domineering mother", "absent father",
-   "tried for police force", "taunted police", "friendly with police", "childhood pyromania"];
-
+let MurderTiles= ["Tortured Animals", "Pillar Of The Community", "Kept Trophies", "White Male",
+    "No Remorse", "Highly Intelligent", "Charming", "Did Badly In School", "Childhood Abuse", 
+    "Late Bed Wetter", "Substance Abuse", "Sexual Sadist", "Childhood Head Trauma", 
+    "Cooling off period between victims", "extreme self pity", "early psychiatric problems", 
+    "escalation", "involved in search party", "domineering mother", "absent father",
+    "tried for police force", "taunted police", "friendly with police", "childhood pyromania", "Accomplice",
+    "Drove a van","Knew the victim(s) personally","Worked / lived down street and was never questioned",
+    "Unrequited love","Described as \"shy / introverted / gentle\"","Attempted insanity plea",
+    "They \"just wanted to see what it's like\"","Voluntary polygraph","Represented self in court","Alliance",];
 
 let FuckedUpTiles= ["complex cover up", "no justice", "fucked by the media", "wrongfully convicted",
-  "sex trafficking","people meet on the internet", "drugs / alcohol", "secret language / vocabulary", 
-  "extreme beliefs", "manipulation", "missing person(s)", "mass hysteria", "cannibalism",
-  "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion / occult",
-  "straight con", "creepy uncle", "sudden catastrophic event", "sexual encounter", "dark web", 
-  "animals", "institutionalized", "government politics", "mutilation", "armed forces",
-  "bloodshed", "victim blaming", "munchausen"];
+    "sex trafficking","people meet on the internet", "drugs / alcohol", "secret language / vocabulary", 
+    "extreme beliefs", "manipulation", "missing person(s)", "mass hysteria", "cannibalism",
+    "conspiracy", "mcdonald triad", "supernatural phenomena", "dark rituals", "religion / occult",
+    "straight con", "creepy uncle", "sudden catastrophic event", "sexual encounter", "dark web", 
+    "animals", "institutionalized", "government politics", "mutilation", "armed forces",
+    "bloodshed", "victim blaming", "munchausen"];
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -45,21 +46,12 @@ function shuffleArray(array) {
 function tileSet(bingoType){ 
     // A function to generate 25 randomized tiles, including a "free" space
     // bingoType is a kind of bingo card, like 'cult'
-
     // we're converting a string, 'cult', into a variable name, cultTiles
     let oldArray = eval(bingoType + 'Tiles');
     shuffleArray(oldArray);
-    newArray=oldArray.slice(0, 24)
+    newArray = oldArray.slice(0, 24)
     return newArray;
 } 
-
-function getFirstElement(anArray){
-    //this function is the leftover bits
-    //of a function that enabled me to test stuffing
-    //a random element of an array into a designated td. 
-    newArray=(newBingoCard(anArray));
-    return newArray.shift(0);
-}
 
 function buildAndPlaceTile(tileText, tileNumber, bingoType){
     // shove the td into the appropriate tr
@@ -68,32 +60,31 @@ function buildAndPlaceTile(tileText, tileNumber, bingoType){
         console.log("there's no Tr!!");
         return
     } else {
-        let td= document.createElement("td");
+        let td = document.createElement("td");
         tr.appendChild(td);
-        td.innerHTML= tileText;
+        td.innerHTML = tileText;
         // then make the td have the text
-        console.log(tileText);
     }
+}
+
+function getCardSlot() {
+    return document.getElementById("bingo-card");
 }
 
 function findOrCreateTr(tileNumber, bingoType) {
     // "bingoType" is the type of card, e.g. "cult" or "murder"
-    let bingoTable = document.getElementById("bingo-card") //TODO: don't run it for every tile, only every table
-    //TODO: this function currently depends on the bingo table ID being "cult-card". Make the HTML have a button or something so the user can pick which flavor of card 
+    let bingoTable = getCardSlot(); //TODO: don't run it for every tile, only every table
     if (!bingoTable) {
         // If the program can't find the table, raise an error
         console.log("Error!!!!! where's the table?!")
         return;
     } else {
         let tbody = bingoTable.children[0]; 
-        let rowNumber = Math.floor(tileNumber/5)
-        console.log('rowNumber is ' + rowNumber);
-        console.log(`tileNumber is ${tileNumber}`);
-
+        let rowNumber = Math.floor(tileNumber/5);
         //the first four times through this tbody.children is empty and that results 
         //in buildAndPlaceTile not being able to find a TR because the first four
         //times this is called tilenumber is not divisible by 5 and rowNumber is 0
-        if (((tileNumber)%5 == 0) || (tbody.childElementCount <= rowNumber)) {
+        if ((tileNumber % 5 == 0) || (tbody.childElementCount <= rowNumber)) {
             return createTr(tbody);
         } else {
             // rowNumber is the rank the tile should be in (e.g. first row, 2nd row, etc)
@@ -104,9 +95,8 @@ function findOrCreateTr(tileNumber, bingoType) {
 }
 
 function returnLastTr(tbody) {
-  let trs = tbody.children;
-  let trsCount = trs.length;
-  return trs[trsCount-1]
+    let trs = tbody.children;
+    return trs[trs.length - 1];
 }
 
 function createTr(tbody) {
@@ -115,24 +105,22 @@ function createTr(tbody) {
     return tr;
 }
 
-
+function bingoCardTitle(bingoType) {
+    let rawTitle = bingoType + " Bingo";
+    let spacedTitle = rawTitle.replace(/([A-Z])/g, " $1");
+    let cardTitle = spacedTitle.charAt(0).toUpperCase() + spacedTitle.slice(1);
+}
 
 function buildCard(bingoType){
-    console.log("here we go!")
-    let title=bingoType + " Bingo";
-    let result = title.replace( /([A-Z])/g, " $1" );
-    let finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-    document.getElementsByTagName("h1")[0].textContent=finalResult;
-    console.log("did it work??")
-    table = document.getElementById("bingo-card");
+    document.getElementsByTagName("h1")[0].textContent = bingoCardTitle(bingoType);
+    table = getCardSlot();
     while (table.firstChild) {
         table.removeChild(table.firstChild);
     }
     let tbody = document.createElement("tbody");
     table.appendChild(tbody);
     // Get the correct tileSet
-    theTiles = tileSet(bingoType);
-    tiles=theTiles.slice()
+    tiles = tileSet(bingoType).slice(); // don't use destructive functions
     // Place each tile
     tiles.splice(12, 0, "Free");
     for (i=0; i<tiles.length; i++) {
@@ -140,4 +128,3 @@ function buildCard(bingoType){
         buildAndPlaceTile(currentTile, i, bingoType)
     }
 }
-
